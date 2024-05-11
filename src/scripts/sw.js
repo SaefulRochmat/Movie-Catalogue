@@ -1,49 +1,33 @@
-import { precacheAndRoute } from 'workbox-precaching';
-import { registerRoute, Route } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import 'regenerator-runtime';
+import CacheHelper from "./utils/cache-helper";
 
-//Do precaching
-precacheAndRoute(self.__WB_MANIFEST);
+const assetsToCache = [
+    './',
+    './android-chrome-192x192.png',
+    './android-chrome-192x192.png',
+    './aple-touch-icon.png',
+    './favicon-16x16.png',
+    './favicon-32x32.png',
+    './index.html',
+    './favicon.png',
+    './app.bundle.js',
+    './app.webmanifest',
+    './sw.bundle.js',
+];
 
-const themoviedbApi = new Route(
-    ({ url }) => url.href.startsWith('https://api.themoviedb.org/3/'),
-    new StaleWhileRevalidate({
-        cacheName: 'themoviedb-api',
-    }),
-);
+self.addEventListener('install', (event) => {
+    event.waitUntil(CacheHelper.cachingAppShell([...assetsToCache]));
 
-const themoviedbImageApi = new Route(
-    ({ url }) => url.href.startsWith('https://image.tmdb.org/t/p/w500/'),
-    new StaleWhileRevalidate({
-        cacheName: 'themoviedb-image-api',
-    }),
-);
-
-registerRoute(themoviedbApi);
-registerRoute(themoviedbImageApi);
-
-self.addEventListener('install', () => {
-    console.log('Service worker: installed');
-    self.skipWaiting();
+    // TODO: Caching App Shell Resource
 });
 
-self.addEventListener('push', (event) => {
-    console.log('Service Worker: Pushed');
+self.addEventListener('activate', (event) => {
+    event.waitUntil(CacheHelper.deleteOldCache());
 
-    const notificationData = {
-        title: 'Pust Notification',
-        options: {
-            body: 'This is a push notification',
-            icon: '/favicon.png',
-            image: '/icon-512x512/icon-512x512.jpg',
-        },
-    };
-
-    const showNotification = self.registration.showNotification(
-        notificationData.title,
-        notificationData.options,
-    );
-    
-    event.waitUntill(showNotification);
+    // TODO: Delete old caches
 });
 
+self.addEventListener('fetch', (event) => {
+    event.respondWith(CacheHelper.revalidateCache(event.request));
+    // TODO: Add/get fetch request to/from caches
+});

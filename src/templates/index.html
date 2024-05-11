@@ -1,39 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Free movie catalogue for you">
-  <link rel="manifest" href="./app.webmanifest">
-  <link rel="icon" href="./favicon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <script src="https://use.fontawesome.com/b070c8f1df.js"></script>
-  <title>Movie Catalogue</title>
-</head>
-<body>
-<header class="app-bar">
-  <div class="app-bar__menu">
-    <button id="hamburgerButton">☰</button>
-  </div>
-  <div class="app-bar__brand">
-    <h1>Movie Catalogue</h1>
-  </div>
-  <nav id="navigationDrawer" class="app-bar__navigation">
-    <ul>
-      <li><a href="#/now-playing">Now Playing</a></li>
-      <li><a href="#/upcoming">Upcoming</a></li>
-      <li><a href="#/like">Liked Movies</a></li>
-    </ul>
-  </nav>
-</header>
-<main id="mainContent"></main>
-<footer>
-  <div id="footerTools">
-    <button id="subscribePushNotification" class="btn">Subscribe Push Notification</button>
-    <button id="unsubscribePushNotification" class="btn">Unsubscribe Push Notification</button>
-  </div>
-  <p>All data obtained from <a href="https://themoviedb.org" target="_blank" rel="noreferrer">TheMovieDB</a></p>
-</footer>
-</body>
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./app.webmanifest">
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+    
+    <title>Restaurant Apps</title>
+
+  </head>
+  <body>
+    <a href="#maincontent" class="skip-content">Skip To Content</a>
+    <header class="header">
+      <div class="header-inner">
+        <h1 class="header-title">WBK Apps</h1>
+      </div>
+      <a id="hamburgerButton" href="#" class="header-menu">☰</a>
+    </header>
+
+    <nav id="navigationDrawer" class="nav">
+      <ul class="nav-list">
+        <li class="nav-item"><a href="#/home">Home</a></li>
+        <li class="nav-item"><a href="#/favorite">Favorite</a></li>
+        <li class="nav-item"><a href="https://github.com/SaefulRochmat">About Us</a></li>
+      </ul>
+    </nav>
+
+    <main id="mainContent">
+      <div class="hero" id="maincontent" tabindex="0">
+        <img src="./images/heros/hero-image_2.jpg" alt="Kumpulan Orang Sedang Makan" />
+      </div>
+
+      <h2>Explore Restaurant</h2>
+
+      <div id="restaurantList" class="restaurantList"></div>
+    </main>
+
+    <footer>
+      <p>Copyright © 2024 - WBK Apps</p>
+    </footer>
+  </body>
 </html>
